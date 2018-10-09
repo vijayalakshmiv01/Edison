@@ -157,10 +157,10 @@ class naoassistant(object):
             if resp.result.spoken_request_text:
                 logging.info('Transcript of user request: "%s".',
                              resp.result.spoken_request_text)
-                print(self.device_name)             
+                logging.info('self.device_name'+self.device_name)             
                 if(self.running_nao==self.device_name or self.running_laptop_nao==self.device_name):
-                
-                    
+
+                    logging.info("entered to find the keyword")
                     if 'introduce' in resp.result.spoken_request_text:
                     #    if CONNV_CONT:
                         self.behavior_proxy.post.startBehavior('animations/Stand/Emotions/Neutral/Hello_1')
@@ -191,7 +191,24 @@ class naoassistant(object):
                         self.behavior_proxy.post.startBehavior('animations/Stand/Gestures/Salute_1')
                     elif 'Jane' in resp.result.spoken_request_text:
                         self.behavior_proxy.post.startBehavior('animations/Stand/Gestures/Give_1')
-
+                    elif 'forward' in resp.result.spoken_request_text:
+                        logging.info("Before moving forward")
+                        self.behavior_proxy.post.startBehavior('motions/move_forward')
+                    elif 'backward' in resp.result.spoken_request_text:
+                        self.behavior_proxy.post.startBehavior('motions/move_backward')
+                    elif 'right' in resp.result.spoken_request_text:
+                        self.behavior_proxy.post.startBehavior('motions/move_right')
+                    elif 'left' in resp.result.spoken_request_text:
+                        self.behavior_proxy.post.startBehavior('motions/move_left')
+                    elif 'sit' in resp.result.spoken_request_text:
+                        self.behavior_proxy.post.startBehavior('motions/sitDown')
+                    elif 'stand' in resp.result.spoken_request_text:
+                        self.behavior_proxy.post.startBehavior('motions/standUp')
+                    elif 'photo' in resp.result.spoken_request_text:
+                        self.behavior_proxy.post.startBehavior('motions/take_photo')
+                    elif 'dance' in resp.result.spoken_request_text:
+                        self.behavior_proxy.post.startBehavior('gangnamstyle/GangnamStyle')                  
+                    logging.info("***********************************************")    
                         #bhvrProxy.post.startBehavior('animations/Stand/Waiting/LookHand_2')
                 logging.info('Playing assistant response.')
 
